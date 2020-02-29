@@ -26,7 +26,7 @@ $VERSION = '0.01';
 Import the desired functions and use them as described for each
 individual one.
 
-    use Jo::Util 'func_name';
+	use Jo::Util 'func_name';
 
 Imported names may be modified like:
 
