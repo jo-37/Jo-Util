@@ -15,11 +15,14 @@ use Carp;
 
 Jo::Util - Loose collection of some tools
 
+=head1 VERSION
+
+This document describes Jo::Util version 0.01
+
 =cut
 
 our
 $VERSION = '0.01';
-
 
 =head1 SYNOPSIS
 
