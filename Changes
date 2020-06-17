@@ -1,5 +1,9 @@
 Revision history for Jo-Util
 
+0.02	Wed Jun 17 13:47:05 2020 +0200
+		[feature]
+		Add narray
+
 0.01    Sat Feb 29 18:14:01 2020 +0100
         First version, released on an unsuspecting world.
 
