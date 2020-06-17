@@ -4,7 +4,7 @@ Jo::Util - Loose collection of some tools
 
 # VERSION
 
-This document describes Jo::Util version 0.02
+This document describes Jo::Util version 0.03
 
 # SYNOPSIS
 

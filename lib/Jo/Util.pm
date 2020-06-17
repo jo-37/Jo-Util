@@ -17,12 +17,12 @@ Jo::Util - Loose collection of some tools
 
 =head1 VERSION
 
-This document describes Jo::Util version 0.02
+This document describes Jo::Util version 0.03
 
 =cut
 
 our
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 =head1 SYNOPSIS
 
@@ -242,11 +242,8 @@ sub narray (&@);
 sub narray (&@) {
     my $val = shift;
     my $size = shift;
-    my $na;
-    for my $i (0 .. $size - 1) {
-        $na->[$i] = @_ ? narray {&$val($i, @_)} @_ : &$val($i);
-    }
-    $na;
+	[map {my $i = $_;
+		@_ ? narray {&$val($i, @_)} @_ : &$val($i)} (0 .. $size - 1)];
 }
 
 =head1 SEE ALSO
