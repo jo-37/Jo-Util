@@ -1,5 +1,9 @@
 Revision history for Jo-Util
 
+0.03	Wed Jun 17 21:59:06 2020 +0200
+		[tweak]
+		shorten narray implementation
+
 0.02	Wed Jun 17 13:47:05 2020 +0200
 		[feature]
 		Add narray
