@@ -17,12 +17,12 @@ Jo::Util - Loose collection of some tools
 
 =head1 VERSION
 
-This document describes Jo::Util version 0.01
+This document describes Jo::Util version 0.02
 
 =cut
 
 our
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 =head1 SYNOPSIS
 
@@ -51,11 +51,13 @@ Functions that may be exported by this modure are:
 
 =item * stopmatch
 
+=item * narray
+
 =back
 
 =cut
 
-our @EXPORT_OK = qw(aref genlist splitdata stopmatch);
+our @EXPORT_OK = qw(aref genlist splitdata stopmatch narray);
 our @ISA = qw(Exporter::Tiny);
 
 =head1 SUBROUTINES
@@ -202,6 +204,7 @@ the given regular expression.
 =head3 Examples
 
 Match everything up to a word in capital letters
+
 	$re = stopmatch qr{\b[A-Z]+\b};
 	$found = /($re)/ for 'Some text up to THIS word';
 	# $found is 'Some text up to '
@@ -211,6 +214,39 @@ Match everything up to a word in capital letters
 sub stopmatch {
 	my $stop = shift;
 	return qr{(?:(?!$stop).)*};
+}
+
+=head2 narray I<subref> I<d1> ... I<dn>
+
+Returns a reference to a I<n>-dimensional array.
+
+I<subref> is a reference to a sub expecing I<n> arguments
+and returning the disired value for C<< $a->[x1]...[xn] >>.
+and I<di> is the size in the I<i>-th dimension.
+
+=head3 Examples
+
+Create simple array ref of 5 elements:
+
+	$ar = narray {$_[0]} 5;
+	# $ar = [0, 1, 2, 3, 4]
+
+Create 3x3 matrix:
+
+	$m = narray {3 * $_[0] + $[1]} 3, 3;
+	# $m = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+
+=cut
+
+sub narray (&@);
+sub narray (&@) {
+    my $val = shift;
+    my $size = shift;
+    my $na;
+    for my $i (0 .. $size - 1) {
+        $na->[$i] = @_ ? narray {&$val($i, @_)} @_ : &$val($i);
+    }
+    $na;
 }
 
 =head1 SEE ALSO

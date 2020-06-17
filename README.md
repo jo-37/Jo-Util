@@ -2,13 +2,17 @@
 
 Jo::Util - Loose collection of some tools
 
+# VERSION
+
+This document describes Jo::Util version 0.02
+
 # SYNOPSIS
 
 Import the desired functions and use them as described for each
 individual one.
 
 ```perl
-use Jo::Util 'func_name';
+    use Jo::Util 'func_name';
 ```
 
 Imported names may be modified like:
@@ -27,6 +31,7 @@ Functions that may be exported by this modure are:
 - genlist
 - splitdata
 - stopmatch
+- narray
 
 # SUBROUTINES
 
@@ -134,9 +139,36 @@ the given regular expression.
 ### Examples
 
 Match everything up to a word in capital letters
-	$re = stopmatch qr{\\b\[A-Z\]+\\b};
-	$found = /($re)/ for 'Some text up to THIS word';
-	# $found is 'Some text up to '
+
+```
+    $re = stopmatch qr{\b[A-Z]+\b};
+    $found = /($re)/ for 'Some text up to THIS word';
+    # $found is 'Some text up to '
+```
+
+## narray _subref_ _d1_ ... _dn_
+
+Returns a reference to a _n_-dimensional array.
+
+_subref_ is a reference to a sub expecing _n_ arguments
+and returning the disired value for `$a->[x1]...[xn]`.
+and _di_ is the size in the _i_-th dimension.
+
+### Examples
+
+Create simple array ref of 5 elements:
+
+```perl
+    $ar = narray {$_[0]} 5;
+    # $ar = [0, 1, 2, 3, 4]
+```
+
+Create 3x3 matrix:
+
+```perl
+    $m = narray {3 * $_[0] + $[1]} 3, 3;
+    # $m = [[0, 1, 2], [3, 4, 5], [6, 7, 8]]
+```
 
 # SEE ALSO
 
